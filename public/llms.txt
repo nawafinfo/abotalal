@@ -1,0 +1,20 @@
+# ابوطلال للدعاية والإعلان والتسويق الإلكتروني
+
+> Abotalal Advertising and Digital Marketing — Arabic marketing, advertising, and digital services in Yemen and the Gulf.
+
+A professional platform offering advertising, digital marketing, page and website management, video editing, security services, printing, curated AI tools, WiFi services, live streaming, and an in-app apps store.
+
+## Pages
+- [Home](/): Overview of services, packages, portfolio, AI tools, and news.
+- [About](/about): Vision, team, and values of ابوطلال للدعاية والإعلان والتسويق الإلكتروني.
+- [Packages](/packages): Gold, Diamond, and Silver service bundles with features and pricing.
+- [Portfolio](/portfolio): Selected creative work across advertising, design, and video.
+- [AI Tools](/ai-tools): Curated AI models for chat, image, video, audio, text, and code.
+- [Apps Store](/apps-store): Downloadable Android apps published by the platform.
+- [Live Stream](/live-stream): Live broadcasts and stream stats.
+- [WiFi Networks](/wifi-networks): WiFi services and product ordering.
+- [Booking](/booking): Book a project consultation.
+- [Contact](/contact): Phone, WhatsApp, and email contact channels.
+
+## Optional
+- [Assistant](/assistant): In-app smart assistant for service questions.

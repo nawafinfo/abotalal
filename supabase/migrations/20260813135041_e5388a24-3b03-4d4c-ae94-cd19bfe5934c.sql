@@ -1,0 +1,1 @@
+UPDATE public.site_settings SET setting_value = replace(replace(setting_value, 'عبدالحميد داوؤد', 'ابوكيان'), 'عبدالحميد داوود', 'ابوكيان') WHERE setting_value LIKE '%عبدالحميد%';

@@ -1,0 +1,367 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ===== الهوية الجديدة: أزرق / أحمر / أبيض ===== */
+  :root {
+    --background: 210 60% 99%;
+    --foreground: 220 60% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 60% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 60% 14%;
+
+    --primary: 220 90% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 60% 96%;
+    --secondary-foreground: 220 60% 18%;
+
+    --muted: 214 45% 95%;
+    --muted-foreground: 220 16% 45%;
+
+    --accent: 0 84% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 40% 89%;
+    --input: 214 45% 94%;
+    --ring: 220 90% 45%;
+
+    --radius: 1rem;
+
+    /* ألوان الهوية */
+    --brand-blue: 220 90% 45%;
+    --brand-blue-dark: 224 85% 30%;
+    --brand-blue-light: 212 95% 58%;
+    --brand-red: 0 84% 52%;
+    --brand-red-dark: 356 78% 42%;
+
+    /* أسماء قديمة معاد توجيهها للهوية الجديدة */
+    --gold: 220 90% 45%;
+    --gold-light: 212 95% 58%;
+    --gold-dark: 224 85% 30%;
+    --navy: 224 85% 22%;
+    --navy-light: 220 70% 34%;
+    --navy-dark: 226 90% 14%;
+    --success: 160 84% 39%;
+    --whatsapp: 142 70% 45%;
+
+    --gradient-gold: linear-gradient(135deg, hsl(212 95% 55%), hsl(224 85% 32%));
+    --gradient-brand: linear-gradient(135deg, hsl(212 95% 55%), hsl(224 85% 32%));
+    --gradient-red: linear-gradient(135deg, hsl(0 84% 56%), hsl(356 78% 40%));
+    --gradient-duo: linear-gradient(120deg, hsl(224 85% 32%) 0%, hsl(212 95% 55%) 45%, hsl(0 84% 54%) 100%);
+    --gradient-navy: linear-gradient(180deg, hsl(224 85% 24%), hsl(226 90% 14%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 99%) 0%, hsl(212 90% 96%) 55%, hsl(0 84% 54% / 0.06) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(212 60% 98%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(220 90% 50% / 0.18) 0%, transparent 70%);
+
+    --shadow-gold: 0 8px 26px -8px hsl(220 90% 45% / 0.35);
+    --shadow-brand: 0 10px 30px -10px hsl(220 90% 45% / 0.4);
+    --shadow-card: 0 10px 34px -14px hsl(220 50% 40% / 0.18);
+    --shadow-elevated: 0 24px 60px -20px hsl(220 60% 35% / 0.25);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 60% 14%;
+    --sidebar-primary: 220 90% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 60% 96%;
+    --sidebar-accent-foreground: 220 60% 18%;
+    --sidebar-border: 214 40% 89%;
+    --sidebar-ring: 220 90% 45%;
+  }
+
+  /* الوضع الفاتح هو الافتراضي (نفس :root) */
+  .light {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --background: 226 60% 7%;
+    --foreground: 210 40% 96%;
+
+    --card: 225 50% 11%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 225 50% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 212 95% 58%;
+    --primary-foreground: 226 60% 8%;
+
+    --secondary: 225 35% 18%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 225 30% 16%;
+    --muted-foreground: 214 20% 68%;
+
+    --accent: 0 84% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 225 30% 22%;
+    --input: 225 30% 20%;
+    --ring: 212 95% 58%;
+
+    --brand-blue: 212 95% 58%;
+    --brand-blue-dark: 224 85% 34%;
+    --brand-blue-light: 205 100% 68%;
+    --brand-red: 0 84% 58%;
+    --brand-red-dark: 356 78% 46%;
+
+    --gold: 212 95% 58%;
+    --gold-light: 205 100% 68%;
+    --gold-dark: 224 85% 34%;
+    --navy: 225 50% 14%;
+    --navy-light: 225 40% 22%;
+    --navy-dark: 226 60% 8%;
+
+    --gradient-gold: linear-gradient(135deg, hsl(205 100% 65%), hsl(224 85% 40%));
+    --gradient-brand: linear-gradient(135deg, hsl(205 100% 65%), hsl(224 85% 40%));
+    --gradient-red: linear-gradient(135deg, hsl(0 84% 60%), hsl(356 78% 44%));
+    --gradient-duo: linear-gradient(120deg, hsl(224 85% 38%) 0%, hsl(205 100% 62%) 45%, hsl(0 84% 58%) 100%);
+    --gradient-navy: linear-gradient(180deg, hsl(225 50% 14%), hsl(226 60% 8%));
+    --gradient-hero: linear-gradient(135deg, hsl(226 60% 9%) 0%, hsl(225 50% 13%) 55%, hsl(0 84% 55% / 0.12) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(225 50% 12%), hsl(226 55% 9%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(212 95% 58% / 0.22) 0%, transparent 70%);
+
+    --shadow-gold: 0 8px 26px -8px hsl(212 95% 58% / 0.35);
+    --shadow-brand: 0 10px 30px -10px hsl(212 95% 58% / 0.4);
+    --shadow-card: 0 10px 34px -14px hsl(226 70% 3% / 0.6);
+    --shadow-elevated: 0 24px 60px -20px hsl(226 70% 3% / 0.75);
+
+    --sidebar-background: 225 50% 10%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 212 95% 58%;
+    --sidebar-primary-foreground: 226 60% 8%;
+    --sidebar-accent: 225 35% 18%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 225 30% 22%;
+    --sidebar-ring: 212 95% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+
+  .gradient-navy {
+    background: var(--gradient-navy);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .glow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-light {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: hsl(var(--gold) / 0.5);
+    border-radius: 3px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--gold));
+  }
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(40 80% 55% / 0.4); }
+  50% { box-shadow: 0 0 20px 10px hsl(40 80% 55% / 0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slide-rtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(40 80% 55% / 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ==== تأثيرات المنصة القابلة للتحكم من لوحة الإدارة ==== */
+.no-glass .glass,
+.no-glass [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+}
+.no-shadows *,
+.no-shadows *::before,
+.no-shadows *::after {
+  box-shadow: none !important;
+}
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+  animation: none !important;
+  transition: none !important;
+}
+.no-glow .platform-glow {
+  display: none !important;
+}
+
+/* ===== محتوى التدوينات (المحرر والعرض) ===== */
+.blog-content { @apply text-foreground leading-relaxed; }
+.blog-content h1 { @apply text-2xl font-extrabold mt-6 mb-3; }
+.blog-content h2 { @apply text-xl font-bold mt-5 mb-2; }
+.blog-content h3 { @apply text-lg font-bold mt-4 mb-2; }
+.blog-content p { @apply my-3; }
+.blog-content ul { @apply list-disc pr-6 my-3 space-y-1; }
+.blog-content ol { @apply list-decimal pr-6 my-3 space-y-1; }
+.blog-content blockquote { @apply border-r-4 border-primary bg-primary/5 pr-4 py-2 my-4 rounded-l-xl; }
+.blog-content pre { @apply bg-muted rounded-xl p-4 my-4 overflow-x-auto text-sm; direction: ltr; }
+.blog-content code { @apply bg-muted px-1.5 py-0.5 rounded text-sm; }
+.blog-content hr { @apply my-6 border-border; }
+.blog-content a, .blog-content .blog-link { @apply text-primary underline underline-offset-4; }
+.blog-content img, .blog-content .blog-img { @apply rounded-2xl my-4 max-w-full shadow-md; }
+.blog-content table, .blog-content .blog-table { @apply w-full my-4 border-collapse overflow-hidden rounded-xl; }
+.blog-content th { @apply bg-muted font-bold p-2 border border-border text-right; }
+.blog-content td { @apply p-2 border border-border; }
+.blog-content mark { @apply px-1 rounded; }
+.blog-callout { @apply my-4 rounded-2xl border p-4 text-sm; }
+.blog-callout p { @apply my-0; }
+.blog-callout::before { @apply block font-bold mb-1; }
+.blog-callout-info { @apply border-sky-500/40 bg-sky-500/10; }
+.blog-callout-info::before { content: "ℹ️ معلومة"; }
+.blog-callout-warning { @apply border-amber-500/40 bg-amber-500/10; }
+.blog-callout-warning::before { content: "⚠️ تحذير"; }
+.blog-callout-danger { @apply border-red-500/40 bg-red-500/10; }
+.blog-callout-danger::before { content: "⛔ خطر"; }
+.blog-callout-success { @apply border-emerald-500/40 bg-emerald-500/10; }
+.blog-callout-success::before { content: "✅ نجاح"; }
+.blog-callout-tip { @apply border-violet-500/40 bg-violet-500/10; }
+.blog-callout-tip::before { content: "💡 نصيحة"; }
+
+/* ===== أدوات الهوية الجديدة ===== */
+.gradient-brand { background: var(--gradient-brand); }
+.gradient-red { background: var(--gradient-red); }
+.gradient-duo { background: var(--gradient-duo); }
+.text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-gradient-duo {
+  background: var(--gradient-duo);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.shadow-brand { box-shadow: var(--shadow-brand); }
+
+@keyframes wave-drift {
+  0%, 100% { transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+  50% { transform: translate3d(2%, -2%, 0) rotate(6deg) scale(1.06); }
+}
+.animate-wave { animation: wave-drift 14s ease-in-out infinite; }
+
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0); opacity: .5; }
+  50% { transform: translateY(-14px); opacity: 1; }
+}
+.animate-particle { animation: particle-float 6s ease-in-out infinite; }
