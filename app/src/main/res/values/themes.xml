@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.Abotalal" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:navigationBarColor">@color/primaryDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/primaryDark</item>
+    </style>
+</resources>
