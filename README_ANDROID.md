@@ -1,11 +1,18 @@
-# Abotalal Android Java
+# TALAL CARDS
 
-هذا مجلد تطبيق Android أصلي مكتوب بلغة Java، جاهز للفتح في Android Studio أو Code Assist.
+تطبيق Android أصلي بلغة Java، متوافق مع Code Assist وAndroid Studio.
 
-## التشغيل
+- اسم التطبيق: TALAL CARDS
+- الإصدار: 1.0.0
+- شاشة إدخال بيانات الراوتر.
+- حفظ البيانات محلياً.
+- شاشة الراوترات المسجلة مع الاتصال والحذف.
 
-1. افتح هذا المجلد من خلال Code Assist.
-2. انتظر انتهاء Gradle Sync.
-3. شغّل المهمة `:app:assembleDebug` أو اضغط Run.
+للبناء داخل Code Assist:
 
-المشروع يعمل بدون مفاتيح API أو خادم خارجي، ويحتوي على واجهة عربية RTL، الصفحة الرئيسية، الخدمات، الحجز، التواصل، وتسجيل دخول محلي تجريبي. يمكن لاحقاً استبدال `LocalSession` بربط Supabase آمن.
+```bash
+./gradlew :app:assembleDebug
+```
+
+ملف APK الناتج:
+`app/build/outputs/apk/debug/app-debug.apk`
