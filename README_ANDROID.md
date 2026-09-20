@@ -1,18 +1,20 @@
 # TALAL CARDS
 
-تطبيق Android أصلي بلغة Java، متوافق مع Code Assist وAndroid Studio.
+تطبيق Android أصلي بلغة Java ومتوافق مع Android Studio وCode Assist.
 
 - اسم التطبيق: TALAL CARDS
 - الإصدار: 1.0.0
-- شاشة إدخال بيانات الراوتر.
-- حفظ البيانات محلياً.
-- شاشة الراوترات المسجلة مع الاتصال والحذف.
+- واجهة RTL مستوحاة من لقطات الشاشة
+- شاشة إدخال بيانات الراوتر
+- حفظ البيانات محلياً
+- شاشة الراوترات المسجلة مع الحذف والإضافة
 
-للبناء داخل Code Assist:
+## البناء
 
 ```bash
 ./gradlew :app:assembleDebug
 ```
 
-ملف APK الناتج:
+الناتج:
+
 `app/build/outputs/apk/debug/app-debug.apk`
