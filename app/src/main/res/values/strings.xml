@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">ابوطلال</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="register">حساب جديد</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="supabase_not_configured">أضف SUPABASE_ANON_KEY في gradle.properties أولاً</string>
     <string name="drawer_open">فتح القائمة</string>
     <string name="drawer_close">إغلاق القائمة</string>
 </resources>

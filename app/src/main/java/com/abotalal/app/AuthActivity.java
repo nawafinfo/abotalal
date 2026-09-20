@@ -2,13 +2,10 @@ package com.abotalal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
-import android.view.Gravity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
@@ -18,55 +15,82 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AuthActivity extends AppCompatActivity {
-    private LinearLayout form;
-    private EditText name, email, password;
+    private EditText nameInput, emailInput, passwordInput;
     private MaterialButton submit;
-    private boolean registerMode = false;
     private ProgressBar progress;
+    private boolean registerMode;
 
     @Override protected void onCreate(Bundle state) {
         super.onCreate(state);
         if (LocalSession.isLoggedIn(this)) { openMain(); return; }
         setContentView(R.layout.activity_auth);
-        form = findViewById(R.id.authForm); name = findViewById(R.id.nameInput); email = findViewById(R.id.emailInput); password = findViewById(R.id.passwordInput);
-        submit = findViewById(R.id.submitAuth); progress = findViewById(R.id.authProgress);
+
+        nameInput = findViewById(R.id.nameInput);
+        emailInput = findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.passwordInput);
+        submit = findViewById(R.id.submitAuth);
+        progress = findViewById(R.id.authProgress);
+
         TabLayout tabs = findViewById(R.id.authTabs);
-        tabs.addTab(tabs.newTab().setText("تسجيل الدخول")); tabs.addTab(tabs.newTab().setText("حساب جديد"));
+        tabs.addTab(tabs.newTab().setText(R.string.login));
+        tabs.addTab(tabs.newTab().setText(R.string.register));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            public void onTabSelected(TabLayout.Tab tab) { registerMode = tab.getPosition() == 1; updateMode(); }
-            public void onTabUnselected(TabLayout.Tab tab) { }
-            public void onTabReselected(TabLayout.Tab tab) { }
+            @Override public void onTabSelected(TabLayout.Tab tab) { registerMode = tab.getPosition() == 1; updateMode(); }
+            @Override public void onTabUnselected(TabLayout.Tab tab) { }
+            @Override public void onTabReselected(TabLayout.Tab tab) { }
         });
-        submit.setOnClickListener(v -> submit());
+        submit.setOnClickListener(v -> submitForm());
         updateMode();
     }
 
     private void updateMode() {
-        name.setVisibility(registerMode ? View.VISIBLE : View.GONE);
-        submit.setText(registerMode ? "إنشاء حساب" : "تسجيل الدخول");
+        nameInput.setVisibility(registerMode ? View.VISIBLE : View.GONE);
+        submit.setText(registerMode ? R.string.create_account : R.string.login);
     }
 
-    private void submit() {
-        String n = name.getText().toString().trim(), e = email.getText().toString().trim(), p = password.getText().toString();
-        if (registerMode && n.length() < 2) { error("أدخل الاسم الكامل"); return; }
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(e).matches()) { error("أدخل بريداً إلكترونياً صحيحاً"); return; }
-        if (p.length() < 6) { error("كلمة المرور يجب أن تكون 6 أحرف على الأقل"); return; }
+    private void submitForm() {
+        String name = nameInput.getText().toString().trim();
+        String email = emailInput.getText().toString().trim();
+        String password = passwordInput.getText().toString();
+
+        if (!SupabaseClient.isConfigured()) { showError(getString(R.string.supabase_not_configured)); return; }
+        if (registerMode && name.length() < 2) { showError("أدخل الاسم الكامل"); return; }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) { showError("أدخل بريداً إلكترونياً صحيحاً"); return; }
+        if (password.length() < 6) { showError("كلمة المرور يجب أن تكون 6 أحرف على الأقل"); return; }
+
         setLoading(true);
-        Call<AuthResponse> call = registerMode ? SupabaseClient.auth().register(new SupabaseAuthApi.RegisterRequest(e, p, n)) : SupabaseClient.auth().login("password", new SupabaseAuthApi.LoginRequest(e, p));
-        call.enqueue(new Callback<AuthResponse>() {
+        Call<AuthResponse> request = registerMode
+                ? SupabaseClient.auth().register(new SupabaseAuthApi.RegisterRequest(email, password, name))
+                : SupabaseClient.auth().login("password", new SupabaseAuthApi.LoginRequest(email, password));
+        request.enqueue(new Callback<AuthResponse>() {
             @Override public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                 setLoading(false);
                 AuthResponse body = response.body();
-                if (!response.isSuccessful() || body == null || (!registerMode && !LocalSessionToken(body))) { error(body == null ? "استجابة غير صحيحة من الخادم" : body.readableError()); return; }
-                if (registerMode && (body.accessToken == null || body.accessToken.isEmpty())) { Toast.makeText(AuthActivity.this, "تم إنشاء الحساب. تحقق من بريدك الإلكتروني ثم سجّل الدخول.", Toast.LENGTH_LONG).show(); return; }
-                LocalSession.save(AuthActivity.this, body, e); LocalSession.saveName(AuthActivity.this, registerMode ? n : e); openMain();
+                if (!response.isSuccessful() || body == null) {
+                    showError(body == null ? "تعذر قراءة استجابة الخادم" : body.readableError());
+                    return;
+                }
+                if (body.accessToken == null || body.accessToken.trim().isEmpty()) {
+                    if (registerMode) {
+                        showMessage("تم إنشاء الحساب. تحقق من بريدك الإلكتروني ثم سجّل الدخول.");
+                    } else {
+                        showError(body.readableError());
+                    }
+                    return;
+                }
+                LocalSession.save(AuthActivity.this, body, email);
+                LocalSession.saveName(AuthActivity.this, registerMode ? name : email);
+                openMain();
             }
-            @Override public void onFailure(Call<AuthResponse> call, Throwable t) { setLoading(false); error("تعذر الاتصال بالخادم. تحقق من الإنترنت ثم أعد المحاولة"); }
+            @Override public void onFailure(Call<AuthResponse> call, Throwable t) {
+                setLoading(false);
+                showError("تعذر الاتصال بالخادم. تحقق من الإنترنت ثم أعد المحاولة");
+            }
         });
     }
 
-    private boolean LocalSessionToken(AuthResponse body) { return body.accessToken != null && !body.accessToken.isEmpty(); }
-    private void setLoading(boolean loading) { progress.setVisibility(loading ? View.VISIBLE : View.GONE); submit.setEnabled(!loading); }
-    private void error(String message) { Toast.makeText(this, message, Toast.LENGTH_LONG).show(); }
+    private void setLoading(boolean value) { progress.setVisibility(value ? View.VISIBLE : View.GONE); submit.setEnabled(!value); }
+    private void showError(String message) { Toast.makeText(this, message, Toast.LENGTH_LONG).show(); }
+    private void showMessage(String message) { Toast.makeText(this, message, Toast.LENGTH_LONG).show(); }
     private void openMain() { startActivity(new Intent(this, MainActivity.class)); finish(); }
 }
