@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ابوطلال</string>
+    <string name="drawer_open">فتح القائمة</string>
+    <string name="drawer_close">إغلاق القائمة</string>
 </resources>

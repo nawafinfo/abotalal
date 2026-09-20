@@ -1,11 +1,13 @@
-# Abotalal Android Java
+# Code Assist build notes
 
-هذا مجلد تطبيق Android أصلي مكتوب بلغة Java، جاهز للفتح في Android Studio أو Code Assist.
+Open this folder as the project root. The project uses Android Gradle Plugin 8.6.1, compileSdk 35, Java 17 and AndroidX.
 
-## التشغيل
+The app includes:
+- Native Java UI with RTL Arabic support.
+- Navigation Drawer and Bottom Navigation.
+- Real Supabase Auth REST calls for login and registration.
+- Local secure-ish session persistence using SharedPreferences (for production, use encrypted storage).
 
-1. افتح هذا المجلد من خلال Code Assist.
-2. انتظر انتهاء Gradle Sync.
-3. شغّل المهمة `:app:assembleDebug` أو اضغط Run.
+Before release, replace the public Supabase anon key in `SupabaseClient.java` if the backend project changes. Never place a service-role key in the app.
 
-المشروع يعمل بدون مفاتيح API أو خادم خارجي، ويحتوي على واجهة عربية RTL، الصفحة الرئيسية، الخدمات، الحجز، التواصل، وتسجيل دخول محلي تجريبي. يمكن لاحقاً استبدال `LocalSession` بربط Supabase آمن.
+Build task: `:app:assembleDebug`.
